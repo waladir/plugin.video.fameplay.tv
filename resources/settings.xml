@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+	<category label="Nastavení">
+        <setting label="Počet položek na stránku" type="slider" id="page_size" range="10, 10, 100" default="100" option="int"/>
+	</category>
+</settings>
