@@ -1,2 +1,5 @@
+v1.0.1 (26.5.2024)
+- úprava URL streamu
+
 v1.0.0 (25.5.2024)
 - první verze
