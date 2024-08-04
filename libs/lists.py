@@ -105,13 +105,16 @@ def list_menu():
     if 'success' not in data or data['success'] != True or 'errors' not in data or len(data['errors']) > 0:
         xbmcgui.Dialog().notification('Fameplay.tv', 'Chyba při načtení menu', xbmcgui.NOTIFICATION_ERROR, 5000)
         sys.exit()
-    for row in data['result']['layout']['desktop']['rows']:
-        for child in row['children']:
-            if 'children' in child and len(child['children']) > 0 and 'type' in child['children'][0] and child['children'][0]['type'] == 'menu' and 'props' in child['children'][0] and 'items' in child['children'][0]['props'] and len(child['children'][0]['props']['items']) > 0:
-                for item in child['children'][0]['props']['items']:
-                    list_item = xbmcgui.ListItem(label = item['navigationLabel'])
-                    url = get_url(action='list_submenu', label = item['navigationLabel'], slug = item['url'], page = 1, id = 'None', contentId = 'None')  
-                    xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
+
+    list_item = xbmcgui.ListItem(label = 'Nejnovější videa')
+    url = get_url(action='list_submenu', label = 'Nejnovější videa', slug = '/nejnovejsi-videa', page = 1, id = 'None', contentId = 'None')  
+    xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
+    list_item = xbmcgui.ListItem(label = 'Všechny pořady')
+    url = get_url(action='list_submenu', label = 'Všechny pořady', slug = '/porady', page = 1, id = 'None', contentId = 'None')  
+    xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
+    list_item = xbmcgui.ListItem(label = 'Kategorie')
+    url = get_url(action='list_submenu', label = 'Kategorie', slug = '/kategorie', page = 1, id = 'None', contentId = 'None')  
+    xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
 
     list_item = xbmcgui.ListItem(label = 'Oblíbené pořady')
     url = get_url(action='list_favourites', label = 'Oblíbené pořady')  
@@ -122,4 +125,14 @@ def list_menu():
     url = get_url(action='list_search', label = 'Vyhledávání')  
     list_item.setArt({ 'thumb' : os.path.join(icons_dir , 'search.png'), 'icon' : os.path.join(icons_dir , 'search.png') })    
     xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
+
+
+    for row in data['result']['layout']['desktop']['rows']:
+        for child_row in row['children']:
+            for child in child_row['children']:
+                if child['type'] == 'ContentGrid':
+                    list_item = xbmcgui.ListItem(label = child['props']['title'])
+                    url = get_url(action='list_submenu', label = child['props']['title'], slug = child['props']['linkData']['url'], page = 1, id = 'None', contentId = 'None')  
+                    xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
+    
     xbmcplugin.endOfDirectory(_handle, cacheToDisc = False) 

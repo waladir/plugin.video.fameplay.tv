@@ -1,5 +1,5 @@
-v1.0.2 (2.6.2024)
-- nová ikona (díky delfin-chikago)
+v1.0.2 (4.8.2024)
+- oprava generování hlavního menu
 
 v1.0.1 (26.5.2024)
 - úprava URL streamu
