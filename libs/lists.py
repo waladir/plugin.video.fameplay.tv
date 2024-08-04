@@ -101,10 +101,6 @@ def list_submenu(label, slug, page, id = '', contentId = ''):
 def list_menu():
     addon = xbmcaddon.Addon()    
     icons_dir = os.path.join(addon.getAddonInfo('path'), 'resources','images')
-    data = call_api(url = 'https://yarp.vpapps.gjirafa.tech/page?url=fameplay.tv/')
-    if 'success' not in data or data['success'] != True or 'errors' not in data or len(data['errors']) > 0:
-        xbmcgui.Dialog().notification('Fameplay.tv', 'Chyba při načtení menu', xbmcgui.NOTIFICATION_ERROR, 5000)
-        sys.exit()
 
     list_item = xbmcgui.ListItem(label = 'Nejnovější videa')
     url = get_url(action='list_submenu', label = 'Nejnovější videa', slug = '/nejnovejsi-videa', page = 1, id = 'None', contentId = 'None')  
@@ -125,6 +121,11 @@ def list_menu():
     url = get_url(action='list_search', label = 'Vyhledávání')  
     list_item.setArt({ 'thumb' : os.path.join(icons_dir , 'search.png'), 'icon' : os.path.join(icons_dir , 'search.png') })    
     xbmcplugin.addDirectoryItem(_handle, url, list_item, True)
+
+    data = call_api(url = 'https://yarp.vpapps.gjirafa.tech/page?url=fameplay.tv/')
+    if 'success' not in data or data['success'] != True or 'errors' not in data or len(data['errors']) > 0:
+        xbmcgui.Dialog().notification('Fameplay.tv', 'Chyba při načtení menu', xbmcgui.NOTIFICATION_ERROR, 5000)
+        sys.exit()
 
 
     for row in data['result']['layout']['desktop']['rows']:

@@ -1,4 +1,4 @@
-﻿<addon id="plugin.video.fameplay.tv" name="Fameplay.tv" provider-name="waladir" version="1.0.2">
+﻿<addon id="plugin.video.fameplay.tv" name="Fameplay.tv" provider-name="waladir" version="1.0.3">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
   </requires>
@@ -12,8 +12,11 @@ Doplněk pro Fameplay.tv
     </description>    
     <platform>all</platform>
     <news>
-v1.0.2 (4.8.2024)
+v1.0.3 (4.8.2024)
 - oprava generování hlavního menu
+    
+v1.0.2 (2.6.2024)
+- nová ikona (díky delfin-chikago)
 
 v1.0.1 (26.5.2024)
 - úprava URL streamu
